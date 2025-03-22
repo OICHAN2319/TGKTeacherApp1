@@ -8,7 +8,7 @@ from openai import OpenAI
 
 # --- 設定 ---
 # データベースパスの統一
-DB_PATH = os.path.expanduser("~/desktop/lesson/tech0/tgk/quiz.db")
+DB_PATH = os.path.join(os.path.dirname(__file__), "quiz.db")
 
 # OpenAI APIキーの読み込み
 load_dotenv()
