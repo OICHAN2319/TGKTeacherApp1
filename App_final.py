@@ -82,6 +82,7 @@ st.markdown("""
     .stApp {
         background-color: #EFF0FF;
         font-family: 'Noto Sans JP', sans-serif;
+        color: black;
     }
     .big-title {
         font-size: 3.5em;
