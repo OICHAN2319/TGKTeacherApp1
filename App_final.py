@@ -125,7 +125,7 @@ st.markdown("""
 
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="big-title">〇〇ガスの機器交換<br>スキルアップクイズ</div>', unsafe_allow_html=True)
+st.markdown('<div class="big-title">〇〇ガスの機器交換<br>Teacherアプリ</div>', unsafe_allow_html=True)
 
 # 初期化
 if "started" not in st.session_state:
