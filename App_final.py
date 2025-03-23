@@ -147,7 +147,7 @@ if not st.session_state.started:
 # --- 選択式クイズ（前半4問） ---
 if st.session_state.current_question < 8:
     q = st.session_state.quiz_order[st.session_state.current_question]
-    st.subheader(f"選択式クイズ {st.session_state.current_question + 1}/8")
+    st.subheader(f"選択問題 {st.session_state.current_question + 1}/8")
     st.write(q["question"])
     selected = st.radio("選択肢を選んでください", q["options"], key=f"q{st.session_state.current_question}")
     
@@ -168,7 +168,7 @@ if st.session_state.current_question < 8:
 
 # --- 自由記述式クイズ ---
 elif not st.session_state.openai_done:
-    st.subheader("自由記述式クイズ")
+    st.subheader("自由記述問題")
     question_data = st.session_state.question_data
     st.write("以下の質問に答えてください：")
     st.markdown(f"**{question_data['question_text']}**")

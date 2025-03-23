@@ -152,7 +152,7 @@ if not st.session_state.started:
 
 
 
-# --- 選択式クイズ（前半4問） ---
+# --- 選択式クイズ（前半8問） ---
 if st.session_state.current_question < 8:
     q = st.session_state.quiz_order[st.session_state.current_question]
     st.subheader(f"選択式クイズ {st.session_state.current_question + 1}/8")
