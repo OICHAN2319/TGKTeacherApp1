@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 # --- 設定 ---
-DB_PATH = os.path.expanduser("~/desktop/lesson/tech0/tgk/quiz.db")
+DB_PATH = os.path.expanduser("~/desktop/lesson/tech0/tgk02/quiz_ver2.db")
 
 # .envファイルを読み込んで環境変数に展開
 load_dotenv()
@@ -69,7 +69,7 @@ if 'score_quiz' not in st.session_state:
     st.session_state.score_quiz = 0
 if 'quiz_order' not in st.session_state:
     quiz_data = get_quiz_data()
-    st.session_state.quiz_order = random.sample(quiz_data, min(4, len(quiz_data)))
+    st.session_state.quiz_order = random.sample(quiz_data, min(8, len(quiz_data)))
 if 'answered' not in st.session_state:
     st.session_state.answered = False
 if 'openai_done' not in st.session_state:
@@ -153,17 +153,17 @@ if not st.session_state.started:
 
 
 # --- 選択式クイズ（前半4問） ---
-if st.session_state.current_question < 4:
+if st.session_state.current_question < 8:
     q = st.session_state.quiz_order[st.session_state.current_question]
-    st.subheader(f"選択式クイズ {st.session_state.current_question + 1}/4")
+    st.subheader(f"選択式クイズ {st.session_state.current_question + 1}/8")
     st.write(q["question"])
     selected = st.radio("選択肢を選んでください", q["options"], key=f"q{st.session_state.current_question}")
     
     if st.button("回答", key=f"submit{st.session_state.current_question}") and not st.session_state.answered:
         correct = q["options"][q["answerIndex"]]
         if selected == correct:
-            st.success("正解！ +20点")
-            st.session_state.score_quiz += 20
+            st.success("正解！ +10点")
+            st.session_state.score_quiz += 10
         else:
             st.error(f"不正解！ 正解は: {correct}")
         st.session_state.answered = True
