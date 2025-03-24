@@ -209,6 +209,9 @@ elif not st.session_state.openai_done:
             st.session_state.feedback = feedback
             st.session_state.openai_done = True
 
+import streamlit as st
+import plotly.graph_objects as go
+
 # --- 採点結果 & 総合評価ボタン ---
 if st.session_state.openai_done:
     st.markdown("### 採点結果")
@@ -219,6 +222,34 @@ if st.session_state.openai_done:
     st.write(f"自由記述クイズ: {st.session_state.openai_score} / 20点")
     st.subheader(f"総合得点: {total_score} / 100点")
 
+    # --- メーター（ゲージ）表示 ---
+    fig = go.Figure(go.Indicator(
+        mode = "gauge+number+delta",
+        value = total_score,  # 合計得点
+        number = {"suffix": "点", "font": {"size": 60}},  # メーター下に「点」付きで表示
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        gauge = {
+            'axis': {'range': [0, 100]},  # 軸の範囲（0から100）
+            'bar': {'color': "#EF4123"},  # バーの色
+            'bgcolor': "white",  # 背景色
+            'borderwidth': 2,  # 枠の幅
+            'bordercolor': "#FFB6C1",
+            'steps': [
+                {'range': [0, 60], 'color': "white"},   # 60点未満は白
+                {'range': [60, 80], 'color': "white"},  # 60〜80点は白
+                {'range': [80, 100], 'color': "#FFB6C1"}  # 80点以上は薄い赤
+            ]
+        }
+    ))
+
+    # メーターをStreamlitに表示
+    st.plotly_chart(fig)
+
+    # 合格点80点のラインを強調
+    st.markdown("### 合格点ライン: 80点")
+    st.markdown("合格点ラインを超えると、合格となります。")
+
+    # 結果に応じたメッセージを表示
     if total_score >= 80:
         st.success("✅ 合格！おめでとうございます！")
     elif total_score >= 60:
@@ -226,6 +257,15 @@ if st.session_state.openai_done:
     else:
         st.error("📚 もっと勉強しよう！")
 
+    # 得点に応じたコメント
+    if total_score >= 80:
+        st.markdown('<div style="color: green; font-size: 1.5em; text-align: center;">🎉 合格！おめでとうございます！</div>', unsafe_allow_html=True)
+    elif total_score >= 60:
+        st.markdown('<div style="color: orange; font-size: 1.5em; text-align: center;">⚠️ 惜しい！もう少し！</div>', unsafe_allow_html=True)
+    else:
+        st.markdown('<div style="color: red; font-size: 1.5em; text-align: center;">📚 もっと勉強しよう！</div>', unsafe_allow_html=True)
+
+    # 「TOPページに戻る」ボタン
     if st.button("TOPページに戻る"):
         for key in st.session_state.keys():
             del st.session_state[key]
