@@ -145,9 +145,16 @@ if not st.session_state.started:
 
 
 # --- 選択式クイズ（前半4問） ---
-if st.session_state.current_question < 8:
+if st.session_state.current_question <len(st.session_state.quiz_order):
     q = st.session_state.quiz_order[st.session_state.current_question]
-    st.subheader(f"選択問題 {st.session_state.current_question + 1}/8")
+    st.subheader(f"選択問題 {st.session_state.current_question + 1}/{len(st.session_state.quiz_order)}")
+    
+    # 進捗バーと進捗状況表示
+    progress = (st.session_state.current_question + 1) / len(st.session_state.quiz_order)
+    st.progress(progress)  # 進捗バーを表示 
+    remaining_questions = len(st.session_state.quiz_order) - st.session_state.current_question
+    st.write(f"残り {remaining_questions} 問！")
+    
     st.write(q["question"])
     selected = st.radio("選択肢を選んでください", q["options"], key=f"q{st.session_state.current_question}")
     
