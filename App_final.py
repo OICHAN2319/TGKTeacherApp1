@@ -121,6 +121,9 @@ st.markdown("""
         border-color: black;
         color: black;
     }
+    .st-ao {
+    background-color: rgb(188 195 207);
+    }
     </style>
 
 """, unsafe_allow_html=True)
