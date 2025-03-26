@@ -137,6 +137,11 @@ with col1:
 with col2:
     st.image("logo.png",  use_container_width=True)
 
+# FVを挿入するセクション
+cols = st.columns([1, 2, 1])
+with cols[1]:
+    st.image("FV.png", width=600)
+    
 # 初期化
 if "started" not in st.session_state:
     st.session_state.started = False
