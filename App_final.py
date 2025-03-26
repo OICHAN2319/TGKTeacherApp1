@@ -132,7 +132,7 @@ st.markdown("""
 col1, col2 = st.columns([8, 1])
 
 with col1:
-    st.markdown('<div class="big-title">〇〇ガスの機器交換<br>最終課題アプリ</div>', unsafe_allow_html=True)
+    st.markdown('<div class="big-title">TGK<br>Teacherアプリ</div>', unsafe_allow_html=True)
 
 with col2:
     st.image("logo.png",  use_container_width=True)
