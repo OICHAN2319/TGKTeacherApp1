@@ -42,7 +42,7 @@ def get_score_and_feedback(question, model_answer, user_answer):
     あなたは世界で有数のリフォームの専門家であり、先生です。
     「{question}」という質問に対する模範解答は、「{model_answer}」ですが、
     あなたの生徒が「{user_answer}」と回答しました。
-    この回答に点数（100点満点）とアドバイスをください。
+    模範解答との類似性を採点基準としてこの回答に点数（100点満点）と具体的な改善点をポイント別に整理してアドバイスをください。
     出力形式: 
     点数: xx点
     アドバイス: xxx
@@ -121,10 +121,31 @@ st.markdown("""
         border-color: black;
         color: black;
     }
-    .st-ao {
-    background-color: rgb(188 195 207);
+
+        
+    /* 3つの選択肢部分に異なる背景色を設定 */
+    .stRadio > div {
+        background-color: #D3E8FF; /* 薄い青 */
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px 0;
     }
+
+    /* ホバー時の背景色変更 */
+    .stRadio > div:hover {
+        background-color: #A7C6FF; /* 少し明るい青 */
+    }
+
+    /* ラジオボタン部分を強調 */
+    .stRadio > div > label {
+        font-size: 1.2em;
+        color: #004098; /* ラベルの色を青に */
+    }
+
+    /* 他の部分の背景色と異なる選択肢部分 */
     </style>
+
+""", unsafe_allow_html=True)
 
 """, unsafe_allow_html=True)
 
