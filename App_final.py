@@ -147,7 +147,6 @@ st.markdown("""
 
 """, unsafe_allow_html=True)
 
-""", unsafe_allow_html=True)
 
 # ロゴを表示
 col1, col2 = st.columns([8, 1])
